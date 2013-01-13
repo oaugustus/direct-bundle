@@ -7,26 +7,19 @@ framework.
 Installing
 ----------
 
-The best way to install DirectBundle into your project is add it as a git submodule.
-To do it, in the terminal, go to your main  Symfony2 application directory
-(e.g. /home/htdocs/symfony-sandbox or c:\\wamp\\www\\symfony-sandbox) and run:
+The best way to install DirectBundle into your project is using composer.
 
 ::
 
-    # add DirectBundle as a git submodule into your project
-    $ git submodule add git://github.com/oaugustus/DirectBundle.git src/Neton/DirectBundle
+    // composer.json
+    {
+        "require": {
+            "oaugustus/direct-bundle": "dev-master"
+        }
+    }
 
-Register the Neton namespace into your autoloader
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-::
-
-    // app/autoload.php
-    $loader->registerNamespaces(array(
-        // ...,
-        'Neton' => __DIR__.'/../src',
-        // ...,
-    );
+Then update your composer:    
+    composer update
 
 Register DirectBundle into your application kernel
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -83,6 +76,11 @@ Expose your controller methods to ExtDirect Api
 
     // ...
     namespace Neton\HelloBundle\Controller;
+
+    // importing annotation references into your controller
+    use Neton\DirectBundle\Annotation\Form as form;
+    use Neton\DirectBundle\Annotation\Remote as remote;
+
 
     class TestController extends Controller
     {
