@@ -123,6 +123,24 @@ class Call
     }
     
     /**
+     * Return an exception to ExtDirect call stack
+     * 
+     * @param  \Exception $exception
+     * @return array
+     */
+    public function getException($exception)
+    {
+        return array(
+          'type' => 'exception',
+          'tid' => $this->tid,
+          'action' => $this->action,
+          'method' => $this->method,
+          'message' => $exception->getMessage(),
+          'where' => $exception->getTraceAsString()
+        );
+    }        
+    
+    /**
      * Initialize the call properties from a single call.
      * 
      * @param array $call

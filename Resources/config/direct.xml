@@ -11,6 +11,7 @@
         <parameter key="direct.api.id">API</parameter>
         <parameter key="direct.api.remote_attribute">@remote</parameter>
         <parameter key="direct.api.form_attribute">@form</parameter>
+        <parameter key="direct.exception.message">Whoops, looks like something went wrong.</parameter>
     </parameters>
 
 </container>

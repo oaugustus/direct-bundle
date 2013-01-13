@@ -19,8 +19,17 @@ class DirectController extends Controller
         // instantiate the api object
         $api = new Api($this->container);
 
+        $debug = $this->container->get('kernel')->isDebug();
+        
+        if ($debug){
+            $exceptionLogStr = 
+                'Ext.direct.Manager.on("exception", function(error){console.error(Ext.util.Format.format("Remote Call: {0}.{1}\n{2}", error.action, error.method, error.message, error.where)); return false;});';            
+        }else {
+            $exceptionLogStr = 
+                sprintf('Ext.direct.Manager.on("exception", function(error){alert("%s");});', $this->container->getParameter('direct.exception.message'));
+        }        
         // create the response
-        $response = new Response("Ext.Direct.addProvider(".$api.");");
+        $response = new Response(sprintf("Ext.Direct.addProvider(%s);%s",$api, $exceptionLogStr));
         $response->headers->set('Content-Type', 'text/javascript');
         
         return $response;
