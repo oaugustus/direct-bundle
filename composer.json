@@ -1,5 +1,5 @@
 {
-    "name": "oaugustus/DirectBundle",
+    "name": "oaugustus/direct-bundle",
     "type": "symfony-bundle",
     "description": "Symfony ExtDirect Bundle",
     "keywords": ["ExtJS, ExtDirect"],
