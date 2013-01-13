@@ -2,7 +2,7 @@
     "name": "oaugustus/direct-bundle",
     "type": "symfony-bundle",
     "description": "Symfony ExtDirect Bundle",
-    "keywords": ["ExtJS, ExtDirect"],
+    "keywords": ["ExtJS","ExtDirect"],
     "homepage": "https://github.com/oaugustus/",
     "license": "MIT",
     "authors": [
