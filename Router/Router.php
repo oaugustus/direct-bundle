@@ -77,13 +77,13 @@ class Router
         }
 
         if ('form' == $this->request->getCallType()) {
-            $result = $call->getResponse($controller->$method($call->getData(), $this->request->getFiles()));
+            $result = $call->getResponse($controller->$method($call->getData(), $this->request->getFiles()));            
         } else {
             try{
                 $result = $controller->$method($call->getData());
-                $response = $call->getResponse($result);
+                $result = $call->getResponse($result);
             }catch(\Exception $e){
-                $response = $call->getException($e);
+                $result = $call->getException($e);
             }                  
         }
 
