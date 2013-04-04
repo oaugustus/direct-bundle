@@ -62,6 +62,22 @@ class DirectExtension extends Extension
             $container->setParameter('direct.api.form_attribute', $config['api']['form_attribute']);
         }
 
+        if (isset($config['api']['safe_attribute'])) {
+            $container->setParameter('direct.api.safe_attribute', $config['api']['safe_attribute']);
+        }
+
+        if (isset($config['api']['unsafe_attribute'])) {
+            $container->setParameter('direct.api.unsafe_attribute', $config['api']['unsafe_attribute']);
+        }
+
+        if (isset($config['api']['default_access'])) {
+            $container->setParameter('direct.api.default_access', $config['api']['default_access']);
+        }
+
+        if (isset($config['exception']['message'])) {
+            $container->setParameter('direct.exception.message', $config['exception']['message']);
+        }
+
     }
 
     /**
