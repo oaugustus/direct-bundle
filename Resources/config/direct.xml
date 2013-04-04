@@ -12,8 +12,8 @@
         <parameter key="direct.api.remote_attribute">@remote</parameter>
         <parameter key="direct.api.form_attribute">@form</parameter>
         <parameter key="direct.api.safe_attribute">@secure</parameter>
-        <parameter key="direct.api.unsafe_attribute">@free</parameter>
-        <parameter key="direct.api.default_access">unsafe</parameter>
+        <parameter key="direct.api.unsafe_attribute">@unsecure</parameter>
+        <parameter key="direct.api.default_access">u</parameter>
         <parameter key="direct.api.session_attribute">account</parameter>
         <parameter key="direct.exception.message">Whoops, looks like something went wrong.</parameter>
     </parameters>

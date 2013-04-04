@@ -46,6 +46,8 @@ class ControllerApi
         $this->container = $container;
         $this->remoteAttribute = $container->getParameter('direct.api.remote_attribute');
         $this->formAttribute = $container->getParameter('direct.api.form_attribute');
+        $this->safeAttribute = $container->getParameter('direct.api.safe_attribute');
+        $this->unsafeAttribute = $container->getParameter('direct.api.unsafe_attribute');
         $this->api = $this->createApi();        
     }
 
@@ -78,7 +80,35 @@ class ControllerApi
     {        
         return str_replace('Controller','',$this->reflection->getShortName());
     }
-    
+
+    /**
+     * Check the method access type.
+     *
+     * @param string $method
+     * @return string s = safe access u = unsafe access n = none
+     */
+    public function getMethodAccess($method)
+    {
+        $doc = $this->reflection->getMethod($method)->getDocComment();
+
+        // default access type is none
+        $access = 'n';
+
+        if (strlen($doc) > 0){
+            $safe = !!preg_match('/' . $this->safeAttribute . '/', $doc);
+            $unsafe = !!preg_match('/' . $this->unsafeAttribute . '/', $doc);
+
+            if ($safe){
+                $access = 's';
+            } elseif ($unsafe){
+                $access = 'u';
+            }
+        }
+
+        return $access;
+
+    }
+
     /**
      * Try create the controller api.
      *

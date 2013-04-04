@@ -2,6 +2,7 @@
 namespace Neton\DirectBundle\Router;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Neton\DirectBundle\Api\ControllerApi;
 
 /**
  * Router is the ExtDirect Router class.
@@ -43,6 +44,8 @@ class Router
         $this->container = $container;
         $this->request = new Request($container->get('request'));
         $this->response = new Response($this->request->getCallType());
+        $this->defaultAccess = $container->getParameter('direct.api.default_access');
+        $this->session = $this->container->get('session')->get($container->getParameter('direct.api.session_attribute'));
     }
 
     /**
@@ -69,12 +72,27 @@ class Router
      */
     private function dispatch($call)
     {
+        $api = new ControllerApi($this->container, $this->getControllerClass($call->getAction()));
+
         $controller = $this->resolveController($call->getAction());
         $method = $call->getMethod()."Action";
+        $accessType = $api->getMethodAccess($method);
 
         if (!is_callable(array($controller, $method))) {
             //todo: throw an execption method not callable
-        }
+            return false;
+        } else
+
+        if ($this->defaultAccess == 's' && $accessType != 'u'){
+            if (!$this->session){
+                $result = $call->getException(new \Exception('Access denied!'));
+            }
+        } else
+        if ($accessType == 's'){
+            if (!$this->session){
+                $result = $call->getException(new \Exception('Access denied!'));
+            }
+        } else
 
         if ('form' == $this->request->getCallType()) {
             $result = $call->getResponse($controller->$method($call->getData(), $this->request->getFiles()));            
@@ -98,13 +116,7 @@ class Router
      */
     private function resolveController($action)
     {
-        list($bundleName, $controllerName) = explode('_',$action);
-        $bundleName.= "Bundle";
-        
-        $bundle = $this->container->get('kernel')->getBundle($bundleName);
-        $namespace = $bundle->getNamespace()."\\Controller";
-
-        $class = $namespace."\\".$controllerName."Controller";
+        $class = $this->getControllerClass($action);
 
         try {
             $controller = new $class();
@@ -117,5 +129,23 @@ class Router
         } catch(Exception $e) {
             // todo: handle exception
         }
+    }
+
+    /**
+     * Return the controller class name.
+     *
+     * @param $action
+     */
+    private function getControllerClass($action)
+    {
+        list($bundleName, $controllerName) = explode('_',$action);
+        $bundleName.= "Bundle";
+
+        $bundle = $this->container->get('kernel')->getBundle($bundleName);
+        $namespace = $bundle->getNamespace()."\\Controller";
+
+        $class = $namespace."\\".$controllerName."Controller";
+
+        return $class;
     }
 }
