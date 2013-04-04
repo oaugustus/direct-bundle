@@ -14,6 +14,7 @@
         <parameter key="direct.api.safe_attribute">@secure</parameter>
         <parameter key="direct.api.unsafe_attribute">@free</parameter>
         <parameter key="direct.api.default_access">unsafe</parameter>
+        <parameter key="direct.api.session_attribute">account</parameter>
         <parameter key="direct.exception.message">Whoops, looks like something went wrong.</parameter>
     </parameters>
 

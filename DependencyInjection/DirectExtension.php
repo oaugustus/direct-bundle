@@ -74,6 +74,10 @@ class DirectExtension extends Extension
             $container->setParameter('direct.api.default_access', $config['api']['default_access']);
         }
 
+        if (isset($config['api']['session_attribute'])) {
+            $container->setParameter('direct.api.session_attribute', $config['api']['session_attribute']);
+        }
+
         if (isset($config['exception']['message'])) {
             $container->setParameter('direct.exception.message', $config['exception']['message']);
         }
