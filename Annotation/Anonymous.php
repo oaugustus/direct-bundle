@@ -5,7 +5,7 @@ namespace Neton\DirectBundle\Annotation;
 /**
  * @Annotation
  */
-class Unsecure
+class Anonymous
 {
     public function __construct()
     {

@@ -99,9 +99,9 @@ class ControllerApi
             $unsafe = !!preg_match('/' . $this->unsafeAttribute . '/', $doc);
 
             if ($safe){
-                $access = 's';
+                $access = 'secure';
             } elseif ($unsafe){
-                $access = 'u';
+                $access = 'anonymous';
             }
         }
 

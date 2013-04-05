@@ -83,12 +83,12 @@ class Router
             return false;
         } else
 
-        if ($this->defaultAccess == 's' && $accessType != 'u'){
+        if ($this->defaultAccess == 'secure' && $accessType != 'anonymous'){
             if (!$this->session){
                 $result = $call->getException(new \Exception('Access denied!'));
             }
         } else
-        if ($accessType == 's'){
+        if ($accessType == 'secure'){
             if (!$this->session){
                 $result = $call->getException(new \Exception('Access denied!'));
             }
