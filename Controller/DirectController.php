@@ -36,6 +36,25 @@ class DirectController extends Controller
     }
 
     /**
+     * Generate the Remoting ExtDirect API.
+     *
+     * @return Response
+     */
+    public function getRemotingAction()
+    {
+        // instantiate the api object
+        $api = new Api($this->container);
+
+        $debug = $this->container->get('kernel')->isDebug();
+
+        // create the response
+        $response = new Response(sprintf("Ext.app.REMOTING_API = %s;", $api));
+        $response->headers->set('Content-Type', 'text/javascript');
+
+        return $response;
+    }
+
+    /**
      * Route the ExtDirect calls.
      *
      * @return Response
