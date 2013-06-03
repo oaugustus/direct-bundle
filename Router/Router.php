@@ -87,16 +87,15 @@ class Router
             if (!$this->session){
                 $result = $call->getException(new \Exception('Access denied!'));
             }
-        } else
-        if ($accessType == 'secure'){
+        } else if ($accessType == 'secure'){
             if (!$this->session){
                 $result = $call->getException(new \Exception('Access denied!'));
             }
-        } else
-
-        if ('form' == $this->request->getCallType()) {
+        } else if ('form' == $this->request->getCallType()) {
             $result = $call->getResponse($controller->$method($call->getData(), $this->request->getFiles()));            
-        } else {
+        }
+
+        if (!isset($result)){
             try{
                 $result = $controller->$method($call->getData());
                 $result = $call->getResponse($result);
