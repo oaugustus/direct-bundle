@@ -35,6 +35,13 @@ class Request
      * @var string
      */
     protected $callType;
+    
+    /**
+     * Is upload request?
+     * 
+     * @var boolean
+     */
+    protected $isUpload = false;
 
     /**
      * Store the Direct calls. Only 1 if it a form call or 1.* if it a
@@ -64,6 +71,7 @@ class Request
         $this->post = $_POST;
         $this->files = $_FILES;
         $this->callType = !empty ($_POST) ? 'form' : 'batch';
+        $this->isUpload = isset($_POST['extUpload']) && $_POST['extUpload'] == 'true';
     }
 
     /**
@@ -74,6 +82,16 @@ class Request
     public function getCallType()
     {
         return $this->callType;
+    }
+    
+    /**
+     * Is upload request?
+     * 
+     * @return boolean
+     */
+    public function isUpload()
+    {
+        return $this->isUpload;
     }
 
     /**
