@@ -97,8 +97,8 @@ class Router
 
         if (!isset($result)){
             try{
-                $result = call_user_func_array(array($controller, $method), $call->getData());
-                //$result = $controller->$method($call->getData());
+                //$result = call_user_func_array(array($controller, $method), $call->getData());
+                $result = $controller->$method($call->getData());
                 $result = $call->getResponse($result);
             }catch(\Exception $e){
                 $result = $call->getException($e);
