@@ -25,7 +25,7 @@ class ControllerFinder
             $finder->files()->in($dir)->name('*Controller.php');
             
             foreach ($finder as $file) {
-
+                if ($file->getRelativePath() === 'Base') continue;
                 $name = explode('.',$file->getFileName());
                 $class = $bundle->getNamespace()."\\Controller\\".$name[0];
                 $controllers[] = $class;

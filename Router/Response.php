@@ -14,15 +14,24 @@ class Response
      * @var string
      */
     protected $type;
+    
+    /**
+     * Is upload request?
+     * 
+     * @var boolean
+     */
+    protected $isUpload = false;
 
     /**
      * Initialize the object setting it type.
      * 
      * @param string $type
+     * @param boolean $isUpload
      */
-    public function __construct($type)
+    public function __construct($type, $isUpload)
     {
         $this->type = $type;
+        $this->isUpload = $isUpload;
     }
 
     /**
@@ -33,7 +42,7 @@ class Response
      */
     public function encode($result)
     {
-        if ('form' == $this->type) {
+        if ($this->type == 'form' && $this->isUpload) {
             //array_walk_recursive($result[0], array($this, 'utf8'));
             return "<html><body><textarea>".json_encode($result[0])."</textarea></body></html>";
         } else {
