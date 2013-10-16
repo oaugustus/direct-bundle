@@ -43,7 +43,7 @@ class Router
     {
         $this->container = $container;
         $this->request = new Request($container->get('request'));
-        $this->response = new Response($this->request->getCallType());
+        $this->response = new Response($this->request->getCallType(), $this->request->isUpload());
         $this->defaultAccess = $container->getParameter('direct.api.default_access');
         $this->session = $this->container->get('session')->get($container->getParameter('direct.api.session_attribute'));
     }
@@ -97,6 +97,7 @@ class Router
 
         if (!isset($result)){
             try{
+                //$result = call_user_func_array(array($controller, $method), $call->getData());
                 $result = $controller->$method($call->getData());
                 $result = $call->getResponse($result);
             }catch(\Exception $e){
