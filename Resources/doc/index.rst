@@ -9,22 +9,21 @@ Installing
 
 The best way to install DirectBundle into your project is using composer.
 
-::
-
-    // composer.json
+.. code-block:: Json
+    
+    //composer.json
     {
         "require": {
             "oaugustus/direct-bundle": "dev-master"
         }
     }
 
-Then update your composer:    
-    composer update
+Then update your composer: ``composer update``
 
 Register DirectBundle into your application kernel
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-::
+.. code-block:: php
 
     // app/AppKernel.php
     public function registerBundles()
@@ -39,10 +38,11 @@ Register DirectBundle into your application kernel
         return $bundles;
     }
 
+
 Register DirectBundle route into your route config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-::
+.. code-block:: yml
 
     // app/config/routing.yml
     # ... your other routes here
@@ -59,20 +59,22 @@ Add the ExtDirect API into your page
 If you is using Twig engine, only add the follow line in your views page at the
 script section:
 
-::
+.. code-block:: html
 
     <script type="text/javascript" src="{{ url('api')}}"></script>
 
+
 Or if you are not using a template engine:
 
-::
+.. code-block:: html
 
     <script type="text/javascript" src="http://localhost/symfony-sandbox/web/app.php/api.js"></script>
+
 
 Expose your controller methods to ExtDirect Api
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-::
+.. code-block:: php
 
     // ...
     namespace Neton\HelloBundle\Controller;
@@ -111,10 +113,11 @@ Expose your controller methods to ExtDirect Api
         }
     }
 
+
 Call the exposed methods from JavaScript
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-::
+.. code-block:: js
 
     // Hello is the Bundle name without 'Bundle'
     // Test is the Controller name without 'Controller'
@@ -122,6 +125,7 @@ Call the exposed methods from JavaScript
     Actions.Hello_Test.index({name: 'Otavio'}, function(r){
        alert(r);
     });
+
 
 Finished
 ~~~~~~~~
