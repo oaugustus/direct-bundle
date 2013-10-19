@@ -123,6 +123,12 @@ Call the exposed methods from JavaScript
        alert(r);
     });
 
+License
+~~~~~~~
+This bundle is under the MIT license. See the complete license in the bundle:
+
+``Resources/meta/LICENSE``
+
 Finished
 ~~~~~~~~
 
