@@ -95,8 +95,8 @@ class ControllerApi
         $access = 'n';
 
         if (strlen($doc) > 0){
-            $safe = !!preg_match('/' . $this->safeAttribute . '/', $doc);
-            $unsafe = !!preg_match('/' . $this->unsafeAttribute . '/', $doc);
+            $safe = !!preg_match('/' . $this->safeAttribute . '/i', $doc);
+            $unsafe = !!preg_match('/' . $this->unsafeAttribute . '/i', $doc);
 
             if ($safe){
                 $access = 'secure';
@@ -146,13 +146,13 @@ class ControllerApi
         if (strlen($method->getDocComment()) > 0) {
             $doc = $method->getDocComment();
 
-            $isRemote = !!preg_match('/' . $this->remoteAttribute . '/', $doc);
+            $isRemote = !!preg_match('/' . $this->remoteAttribute . '/i', $doc);
 
             if ($isRemote) {
                 $api['name'] = str_replace('Action','',$method->getName());
                 $api['len'] = $method->getNumberOfParameters();
 
-                if(!!preg_match('/' . $this->formAttribute . '/', $doc)) {
+                if(!!preg_match('/' . $this->formAttribute . '/i', $doc)) {
                     $api['formHandler'] = true;
                 }
             }
